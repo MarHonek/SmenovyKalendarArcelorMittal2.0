@@ -18,6 +18,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ManagingActivity"
+            android:label="@string/title_activity_managing"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CreatingEditableShift"
+            android:label="@string/title_activity_creating_editable_shift"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".StaticShiftChoose" />
+        <activity
+            android:name=".CreatingSymbol"
+            android:label="@string/title_activity_creating_symbol"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

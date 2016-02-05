@@ -3,9 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="mh.smenovykalendararcelormittal20.MainActivity">
 
-    <item android:id="@+id/ic_managing"
-        android:icon="@drawable/ic_managing"
-        android:title="Správa směn"
+    <item android:id="@+id/ic_edit"
+        android:icon="@drawable/ic_edit"
+        android:title="Úprava"
+        android:orderInCategory="101"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/ic_delete"
+        android:icon="@drawable/ic_delete"
+        android:title="Odstranit"
         android:orderInCategory="101"
         app:showAsAction="always"/>
 

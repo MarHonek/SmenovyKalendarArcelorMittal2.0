@@ -4,6 +4,13 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#ffc107</item>
+        <item name="colorPrimaryDark">#ffa000</item>
+        <item name="colorAccent">#ffc400</item>
+    </style>
+
 </resources>
