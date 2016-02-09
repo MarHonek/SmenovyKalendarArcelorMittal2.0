@@ -18,8 +18,17 @@
             android:layout_height="?attr/actionBarSize"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
+
+
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_main" />
+
+    <View
+    android:layout_width="match_parent"
+    android:layout_height="4dp"
+    android:background="@drawable/shadow"
+    android:theme="@style/ElevationCompatTheme"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 </android.support.design.widget.CoordinatorLayout>

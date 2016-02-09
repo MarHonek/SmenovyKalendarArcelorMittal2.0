@@ -3,9 +3,12 @@ package mh.smenovykalendararcelormittal20;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telecom.Call;
@@ -13,18 +16,26 @@ import android.text.method.CharacterPickerDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import mh.smenovykalendararcelormittal20.templates.ShiftTemplate;
 import mh.smenovykalendararcelormittal20.templates.StaticShiftTemplate;
 
 public class CreatingEditableShift extends AppCompatActivity {
 
     Database database;
     int positionShift;
-    EditText shift_kind, title, shortTitle;
+    EditText shift_kind, title;
+    LinearLayout icon;
+    ArrayList<ShiftTemplate> shifts;
+    GridView gridview;
+    int colorShift;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +48,28 @@ public class CreatingEditableShift extends AppCompatActivity {
 
         database = new Database(this);
 
+
+
+
+
         shift_kind = (EditText) findViewById(R.id.editext_shift_num);
         title = (EditText)findViewById(R.id.editext_shift_title);
-        shortTitle = (EditText)findViewById(R.id.editext_shift_shortTitle);
+        icon = (LinearLayout)findViewById(R.id.shift_icon);
+
+
+        GradientDrawable background = (GradientDrawable) icon.getBackground();
+        background.setColor(getResources().getColor(R.color.colorPrimary));
+
+
+        if(getIntent().getBooleanExtra("edit", false))
+        {
+            int position = getIntent().getIntExtra("position", -1);
+            shifts = database.getAllShifts();
+            title.setText(shifts.get(position).getTitle());
+            background = (GradientDrawable) icon.getBackground();
+            background.setColor(shifts.get(position).getColor());
+
+        }
 
         shift_kind.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +112,7 @@ public class CreatingEditableShift extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.ic_accept) {
-            database.insertShift(title.getText().toString(), shortTitle.getText().toString(), positionShift, Color.RED);
+            database.insertShift(title.getText().toString(),  "A", positionShift, Color.RED);
             this.finish();
             return true;
         }

@@ -1,5 +1,7 @@
 package mh.smenovykalendararcelormittal20;
 
+import android.view.View;
+
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidGridAdapter;
 
@@ -14,4 +16,5 @@ public class CalendarCustomFragment extends CaldroidFragment {
         return new CalendarCustomAdapter(getActivity(), month, year,
                 getCaldroidData(), extraData);
     }
+
 }

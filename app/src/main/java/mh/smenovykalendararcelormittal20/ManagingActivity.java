@@ -52,12 +52,14 @@ public class ManagingActivity extends AppCompatActivity {
                 if (tabLayout.getSelectedTabPosition() == 0) {
                     Intent intent = new Intent(ManagingActivity.this, CreatingEditableShift.class);
                     intent.putExtra("edit",false);
+                    intent.putExtra("position", -1);
                     startActivity(intent);
                 }
                 else if (tabLayout.getSelectedTabPosition() == 1)
                 {
                     Intent intent = new Intent(ManagingActivity.this, CreatingSymbol.class);
                     intent.putExtra("edit",false);
+                    intent.putExtra("position", -1);
                     startActivity(intent);
                 }
             }

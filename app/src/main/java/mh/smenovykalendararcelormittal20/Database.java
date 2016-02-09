@@ -113,6 +113,25 @@ public class Database extends SQLiteOpenHelper {
 
     }
 
+    public void insertSymbols(String name, String shortTitle, String color)
+    {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+
+        ContentValues values = new ContentValues();
+        values.put("name", name); // get title
+        values.put("short", shortTitle); // get author
+        values.put("color", color);
+
+        db.insert("symbols", null, values);
+
+        db.close();
+
+
+    }
+
+
 
 
     public ArrayList<ShiftTemplate> getAllShifts() {

@@ -26,11 +26,13 @@
         <activity
             android:name=".CreatingEditableShift"
             android:label="@string/title_activity_creating_editable_shift"
+            android:parentActivityName=".ManagingActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".StaticShiftChoose" />
         <activity
             android:name=".CreatingSymbol"
             android:label="@string/title_activity_creating_symbol"
+            android:parentActivityName=".ManagingActivity"
             android:theme="@style/AppTheme"></activity>
     </application>
 

@@ -1,9 +1,13 @@
 package mh.smenovykalendararcelormittal20.tabFragment;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
+import android.support.v7.widget.AppCompatSpinner;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,7 +19,9 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import mh.smenovykalendararcelormittal20.CreatingEditableShift;
 import mh.smenovykalendararcelormittal20.Database;
+import mh.smenovykalendararcelormittal20.ManagingActivity;
 import mh.smenovykalendararcelormittal20.R;
 import mh.smenovykalendararcelormittal20.adapters.ShiftListViewAdapter;
 import mh.smenovykalendararcelormittal20.templates.ListTemplates;
@@ -99,14 +105,38 @@ public class FragmentShift extends Fragment {
         }
 
         @Override
-        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+        public boolean onActionItemClicked(final ActionMode mode, MenuItem item) {
             if (item.getItemId() == R.id.ic_edit)
             {
+                Intent intent = new Intent(getActivity(), CreatingEditableShift.class);
+                intent.putExtra("edit", true);
+                intent.putExtra("position", position);
+                startActivity(intent);
 
             }
             else if (item.getItemId() == R.id.ic_delete)
             {
-                database.deleteShift(position);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Smazat vlastní schéma");
+                builder.setMessage("Opravdu chcete smazat toto vlastní schéma?");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        database.deleteShift(position);
+                        getShiftsFromDatabase();
+                        mode.finish();
+                    }
+                });
+                builder.setNegativeButton("Zrušit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        mode.finish();
+
+                    }
+                });
+                builder.show();
+
             }
             return true;
         }

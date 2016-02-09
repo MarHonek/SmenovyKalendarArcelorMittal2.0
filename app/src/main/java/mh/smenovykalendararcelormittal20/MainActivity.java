@@ -18,9 +18,12 @@ import android.widget.Toast;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,12 +58,7 @@ public class MainActivity extends AppCompatActivity {
         // **** If you want normal CaldroidFragment, use below line ****
         caldroidFragment = new CalendarCustomFragment();
 
-        // //////////////////////////////////////////////////////////////////////
-        // **** This is to show customized fragment. If you want customized
-        // version, uncomment below line ****
-//		 caldroidFragment = new CaldroidSampleCustomFragment();
 
-        // Setup arguments
 
         // If Activity is created after rotation
         if (savedInstanceState != null) {
@@ -81,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
             // Uncomment this line to use Caldroid in compact mode
 
 
+
+
+
             // Uncomment this line to use dark theme
 //            args.putInt(CaldroidFragment.THEME_RESOURCE, com.caldroid.R.style.CaldroidDefaultDark);
 
@@ -98,18 +99,21 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSelectDate(Date date, View view) {
-                Toast.makeText(getApplicationContext(), formatter.format(date),
-                        Toast.LENGTH_SHORT).show();
+              /*  Toast.makeText(getApplicationContext(), formatter.format(date),
+                        Toast.LENGTH_SHORT).show();*/
 
-                caldroidFragment.setBackgroundResourceForDate(0xffff0000, date);
+            //    caldroidFragment.setBackgroundResourceForDate(Color.RED, date);
                 caldroidFragment.refreshView();
             }
 
             @Override
             public void onChangeMonth(int month, int year) {
-                String text = "month: " + month + " year: " + year;
-                Toast.makeText(getApplicationContext(), text,
-                        Toast.LENGTH_SHORT).show();
+             //   String text = "month: " + month + " year: " + year;
+              /*  Toast.makeText(getApplicationContext(), text,
+                        Toast.LENGTH_SHORT).show();*/
+
+                getSupportActionBar().setTitle(getCzechMonth(month-1) + " " + String.valueOf(year));
+
             }
 
             @Override
@@ -122,9 +126,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCaldroidViewCreated() {
                 if (caldroidFragment.getLeftArrowButton() != null) {
-                    Toast.makeText(getApplicationContext(),
+                    hideHeader(caldroidFragment);
+                  /*  Toast.makeText(getApplicationContext(),
                             "Caldroid view is created", Toast.LENGTH_SHORT)
-                            .show();
+                            .show();*/
                 }
             }
 
@@ -146,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
     private void hideHeader(CaldroidFragment fragCalendar) {
         fragCalendar.getMonthTitleTextView().setVisibility(View.GONE);
         fragCalendar.getLeftArrowButton().setVisibility(View.GONE);
@@ -172,10 +176,23 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this,ManagingActivity.class));
             return true;
         }
+        else if (id == R.id.ic_a)
+        {
+            Calendar c = new GregorianCalendar(2016,4,21);
+
+            Date dd = c.getTime();
+
+            caldroidFragment.moveToDate(dd);
+        }
         return super.onOptionsItemSelected(item);
     }
 
 
+    public String getCzechMonth(int month)
+    {
+        String[] months = new String[]{"Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec"};
+        return months[month];
+    }
 
 
     /**

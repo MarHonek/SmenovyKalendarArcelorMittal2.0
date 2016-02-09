@@ -8,9 +8,16 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#ffc107</item>
-        <item name="colorPrimaryDark">#ffa000</item>
-        <item name="colorAccent">#ffc400</item>
+        <item name="colorPrimary">#ff9800</item>
+        <item name="colorPrimaryDark">#f57c00</item>
+        <item name="colorAccent">#ff6d00</item>
+        <item name="windowActionModeOverlay">true</item>
     </style>
+
+
+    <style name="ElevationCompatTheme">
+        <item name="android:visibility">gone</item>
+    </style>
+
 
 </resources>
