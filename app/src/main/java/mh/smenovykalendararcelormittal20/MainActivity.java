@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean undo = false;
     private CalendarCustomFragment caldroidFragment;
 
+
     private void setCustomResourceForDates() {
         Calendar cal = Calendar.getInstance();
 
@@ -176,13 +177,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this,ManagingActivity.class));
             return true;
         }
-        else if (id == R.id.ic_a)
+        else if (id == R.id.ic_today)
         {
-            Calendar c = new GregorianCalendar(2016,4,21);
-
-            Date dd = c.getTime();
-
-            caldroidFragment.moveToDate(dd);
+            Calendar today = Calendar.getInstance();
+            Date todayTime = today.getTime();
+            caldroidFragment.moveToDate(todayTime);
         }
         return super.onOptionsItemSelected(item);
     }

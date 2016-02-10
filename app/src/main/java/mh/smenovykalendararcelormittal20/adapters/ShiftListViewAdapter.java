@@ -48,8 +48,7 @@ public class ShiftListViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v = convertView;
-        if (convertView == null) {
+        View v;
             LayoutInflater li = (LayoutInflater) mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = li.inflate(R.layout.shift_listview_item_layout, null);
@@ -62,10 +61,11 @@ public class ShiftListViewAdapter extends BaseAdapter {
 
             title.setText(list.get(position).getTitle());
             shorTitle.setText(list.get(position).getShortTitle());
+            desc.setText(list.get(position).getDesc());
             GradientDrawable background = (GradientDrawable) icon.getBackground();
             background.setColor(list.get(position).getColor());
 
-        }
+
         return v;
     }
 }

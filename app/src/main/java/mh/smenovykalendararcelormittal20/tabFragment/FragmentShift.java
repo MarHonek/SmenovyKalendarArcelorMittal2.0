@@ -27,6 +27,7 @@ import mh.smenovykalendararcelormittal20.adapters.ShiftListViewAdapter;
 import mh.smenovykalendararcelormittal20.templates.ListTemplates;
 import mh.smenovykalendararcelormittal20.templates.ShiftSymbolTemplates;
 import mh.smenovykalendararcelormittal20.templates.ShiftTemplate;
+import mh.smenovykalendararcelormittal20.templates.StaticShiftTemplate;
 
 /**
  * Created by Martin on 31.01.2016.
@@ -72,7 +73,12 @@ public class FragmentShift extends Fragment {
     public void getShiftsFromDatabase()
     {
         list = database.getAllShifts();
-        ArrayList<ListTemplates> adapterList = (ArrayList<ListTemplates>) list.clone();
+        ArrayList<ListTemplates> adapterList = new ArrayList<>();
+        ArrayList<String> staticShifts = StaticShiftTemplate.getStringArray();
+        for (int i = 0; i < list.size();i++)
+        {
+            adapterList.add(new ListTemplates(list.get(i).getTitle(), list.get(i).getShortTitle(), list.get(i).getColor(), staticShifts.get(list.get(i).getPosition())));
+        }
         adapter = new ShiftListViewAdapter(getContext(), adapterList);
         listView.setAdapter(adapter);
     }
@@ -112,6 +118,7 @@ public class FragmentShift extends Fragment {
                 intent.putExtra("edit", true);
                 intent.putExtra("position", position);
                 startActivity(intent);
+                mode.finish();
 
             }
             else if (item.getItemId() == R.id.ic_delete)

@@ -96,6 +96,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center"
+        android:id="@+id/radiobutton_shifts"
         android:layout_margin="5dp">
 
 

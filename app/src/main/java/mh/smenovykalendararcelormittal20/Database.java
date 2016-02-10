@@ -184,6 +184,32 @@ public class Database extends SQLiteOpenHelper {
         return list;
     }
 
+    public void updateSymbols(String name, String shortTitle, String color, int position)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String d ="UPDATE symbols SET name='"+name+"', short='"+shortTitle+"', color='"+color+"' WHERE id in (SELECT id FROM symbols LIMIT 1 OFFSET "+position+")";
+
+        db.execSQL(d);
+        db.close();
+    }
+
+    public void updateShift(String title, String shortTitle, int position,int color, int positionOfCustom)
+    {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String d ="UPDATE shifts SET title='"+title+"', short='"+shortTitle+"', position="+position+", color="+color+" WHERE id in (SELECT id FROM Shifts LIMIT 1 OFFSET "+positionOfCustom+")";
+
+        db.execSQL(d);
+
+        db.close();
+
+
+    }
+
+
+
 
     public void deleteShift(int position) {
 

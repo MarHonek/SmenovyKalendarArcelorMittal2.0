@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Martin on 02.02.2016
  */
-public abstract class ListTemplates{
+public class ListTemplates{
 
     String title;
     String shortTitle;

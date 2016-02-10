@@ -69,6 +69,11 @@ public class FragmentSymbol extends Fragment{
         return v;
     }
 
+    @Override
+    public void onResume() {
+        getSymbolsFromDatabase();
+        super.onResume();
+    }
 
     public void getSymbolsFromDatabase()
     {
@@ -77,6 +82,7 @@ public class FragmentSymbol extends Fragment{
         adapter = new ShiftListViewAdapter(getContext(), adapterList);
         listView.setAdapter(adapter);
     }
+
 
     class ActionBarCallBack implements ActionMode.Callback {
 
@@ -107,6 +113,7 @@ public class FragmentSymbol extends Fragment{
                 intent.putExtra("edit", true);
                 intent.putExtra("position", position);
                 startActivity(intent);
+                mode.finish();
             }
             else if (item.getItemId() == R.id.ic_delete)
             {
