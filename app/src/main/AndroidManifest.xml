@@ -33,6 +33,11 @@
             android:name=".CreatingSymbol"
             android:label="@string/title_activity_creating_symbol"
             android:parentActivityName=".ManagingActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ChangeShiftActivity"
+            android:label="@string/title_activity_change_shift"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme"></activity>
     </application>
 

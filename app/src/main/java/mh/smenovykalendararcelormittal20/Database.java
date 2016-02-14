@@ -113,6 +113,44 @@ public class Database extends SQLiteOpenHelper {
 
     }
 
+    public void insertAlternative(String kind, int position, String month, String year, int custom, String color)
+    {
+
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("kind", kind);
+        values.put("position", position);
+        values.put("month", month);
+        values.put("year", year);
+        values.put("custom", custom);
+        values.put("color", color);
+
+        db.insert("alternative", null, values);
+
+        db.close();
+
+
+    }
+
+    public void insertNote(int position, String month, String year, String note, int custom) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("position", position);
+        values.put("month", month);
+        values.put("year", year);
+        values.put("note", note);
+        values.put("custom", custom);
+
+        db.insert("notes", null, values);
+
+        db.close();
+    }
+
+
+
     public void insertSymbols(String name, String shortTitle, String color)
     {
 

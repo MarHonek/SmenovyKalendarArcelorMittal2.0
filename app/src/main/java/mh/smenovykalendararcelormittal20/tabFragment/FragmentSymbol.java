@@ -51,12 +51,7 @@ public class FragmentSymbol extends Fragment{
         listView = (ListView) v.findViewById(R.id.listView_symbols);
 
         database = new Database(getContext());
-        list = database.getSymbols();
-
-        ArrayList<ListTemplates> adapterList = (ArrayList<ListTemplates>) list.clone();
-
-        adapter = new ShiftListViewAdapter(getContext(), adapterList);
-        listView.setAdapter(adapter);
+        getSymbolsFromDatabase();
 
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override

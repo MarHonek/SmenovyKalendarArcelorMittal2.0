@@ -119,9 +119,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onLongClickDate(Date date, View view) {
-                Toast.makeText(getApplicationContext(),
-                        "Long click " + formatter.format(date),
-                        Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this,ChangeShiftActivity.class);
+
+                String intMonth = (String) android.text.format.DateFormat.format("MM", date); //06
+                String year = (String) android.text.format.DateFormat.format("yyyy", date); //2013
+                String day = (String) android.text.format.DateFormat.format("dd", date); //20
+
+                intent.putExtra("month", intMonth);
+                intent.putExtra("year", year);
+                intent.putExtra("day", day);
+                startActivity(intent);
             }
 
             @Override
@@ -186,6 +193,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onResume() {
+        caldroidFragment.refreshView();
+        super.onResume();
+    }
 
     public String getCzechMonth(int month)
     {

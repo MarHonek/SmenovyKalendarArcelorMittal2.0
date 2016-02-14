@@ -1,7 +1,11 @@
 package mh.smenovykalendararcelormittal20.tabFragment;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.view.LayoutInflater;
@@ -12,12 +16,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 import mh.smenovykalendararcelormittal20.R;
-import mh.smenovykalendararcelormittal20.adapters.ShiftListViewAdapter;
 import mh.smenovykalendararcelormittal20.templates.StaticShiftTemplate;
 
 /**
@@ -29,6 +33,9 @@ public class FragmentStaticShift extends Fragment {
     ArrayList<String> array;
     ArrayAdapter<String> adapter;
 
+    String sh = "";
+
+    AlertDialog alertDialog;
 
 
 
@@ -48,6 +55,93 @@ public class FragmentStaticShift extends Fragment {
 
         listView.setAdapter(adapter);
 
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+
+
+                final CharSequence[] items = getItemss(position);
+
+
+
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Zvolte směnu");
+                builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int item) {
+
+
+                        switch(item)
+                        {
+                            case 0:
+                                sh = "A";
+                                break;
+                            case 1:
+                                sh = "B";
+
+                                break;
+                            case 2:
+                                sh = "C";
+                                break;
+                            case 3:
+                                sh = "D";
+                                break;
+
+                        }
+
+
+                        SharedPreferences pref = getActivity().getSharedPreferences("shift", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putInt("positionOfCustom", -1);
+                        editor.putInt("listPosition", position);
+                        editor.putString("shortTitle", sh);
+                        editor.putBoolean("customShift", false);
+                        editor.commit();
+
+                        getActivity().finish();
+                        alertDialog.dismiss();
+
+
+                    }
+                })
+                        .setNegativeButton("Zrušit", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog = builder.create();
+                alertDialog.show();
+
+            }
+        });
+
         return v;
     }
+
+    public CharSequence[] getItemss(int position)
+    {
+        StaticShiftTemplate staticS = StaticShiftTemplate.createList().get(position);
+        int i = staticS.getNumberOfShits();
+        ArrayList<String> list = new ArrayList<>();
+        list.add("A");
+        list.add("B");
+
+
+        if(i == 3) {
+            list.add("C");
+        }
+        else if(i == 4) {
+            list.add("C");
+            list.add("D");
+        }
+
+        CharSequence[] copyList = list.toArray(new CharSequence[list.size()]);
+
+
+        return copyList;
+
+
+    }
+
 }

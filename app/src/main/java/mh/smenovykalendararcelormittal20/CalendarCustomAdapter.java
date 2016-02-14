@@ -1,8 +1,11 @@
 package mh.smenovykalendararcelormittal20;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.os.HandlerThread;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import com.roomorama.caldroid.CaldroidGridAdapter;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 import hirondelle.date4j.DateTime;
 
@@ -32,10 +36,23 @@ public class CalendarCustomAdapter extends CaldroidGridAdapter {
      * @param year
      * @param caldroidData
      * @param extraData
+     *
      */
+
+    int index;
+
     public CalendarCustomAdapter(Context context, int month, int year, HashMap<String, Object> caldroidData, HashMap<String, Object> extraData) {
         super(context, month, year, caldroidData, extraData);
+
+
+
+
+
+
+
     }
+
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -48,27 +65,46 @@ public class CalendarCustomAdapter extends CaldroidGridAdapter {
             cellView = inflater.inflate(R.layout.calendar_day_layout, null);
         }
 
-        int topPadding = cellView.getPaddingTop();
-        int leftPadding = cellView.getPaddingLeft();
-        int bottomPadding = cellView.getPaddingBottom();
-        int rightPadding = cellView.getPaddingRight();
+        SharedPreferences pref = context.getSharedPreferences("shift", Context.MODE_PRIVATE);
+        index = pref.getInt("listPosition", -2);
+        String radio = pref.getString("shortTitle", "");
+
+
+        String darkGrayColor = "#AAAAAA";
+        String lightGrayColor = "#EEEEEE";
+
+
 
         TextView tv1 = (TextView) cellView.findViewById(R.id.textView_date);
         TextView tv2 = (TextView) cellView.findViewById(R.id.textView_shift);
+        cellView.setBackgroundColor(Color.parseColor(lightGrayColor));
+        tv1.setTextColor(Color.BLACK);
+        tv2.setTextColor(Color.BLACK);
+
 
 
 
         // Get dateTime of this cell
         DateTime dateTime = this.datetimeList.get(position);
-        Resources resources = context.getResources();
 
+        ShiftCalculate calculate = new ShiftCalculate(index, radio);
+        calculate.setDate(dateTime.getDay(), dateTime.getMonth(), dateTime.getYear());
+        // Set color of the dates in previous / next month
+        if (dateTime.getMonth() != month) {
+            tv1.setTextColor(Color.parseColor(darkGrayColor));
+            tv2.setTextColor(Color.parseColor(darkGrayColor));
+            cellView.setBackgroundColor(Color.WHITE);
+        }
+
+
+        tv2.setText(calculate.getShiftByDate());
 
 
         tv1.setText("" + dateTime.getDay());
 
-        // Set custom color if required
-        setCustomResources(dateTime, cellView, tv1);
 
         return cellView;
     }
+
+
 }

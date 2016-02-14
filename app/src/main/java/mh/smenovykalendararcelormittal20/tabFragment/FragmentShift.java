@@ -1,7 +1,9 @@
 package mh.smenovykalendararcelormittal20.tabFragment;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -56,6 +58,22 @@ public class FragmentShift extends Fragment {
 
         getShiftsFromDatabase();
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                
+                SharedPreferences pref = getActivity().getSharedPreferences("shift", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putInt("positionOfCustom", position);
+                editor.putInt("listPosition", -1);
+                editor.putString("shortTitle", "");
+                editor.putBoolean("customShift", true);
+                editor.commit();
+
+                getActivity().finish();
+
+            }
+        });
 
 
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -75,12 +93,13 @@ public class FragmentShift extends Fragment {
         list = database.getAllShifts();
         ArrayList<ListTemplates> adapterList = new ArrayList<>();
         ArrayList<String> staticShifts = StaticShiftTemplate.getStringArray();
-        for (int i = 0; i < list.size();i++)
-        {
-            adapterList.add(new ListTemplates(list.get(i).getTitle(), list.get(i).getShortTitle(), list.get(i).getColor(), staticShifts.get(list.get(i).getPosition())));
+        if(list.size() != 0) {
+            for (int i = 0; i < list.size(); i++) {
+                adapterList.add(new ListTemplates(list.get(i).getTitle(), list.get(i).getShortTitle(), list.get(i).getColor(), staticShifts.get(list.get(i).getPosition())));
+            }
+            adapter = new ShiftListViewAdapter(getContext(), adapterList);
+            listView.setAdapter(adapter);
         }
-        adapter = new ShiftListViewAdapter(getContext(), adapterList);
-        listView.setAdapter(adapter);
     }
 
     @Override
