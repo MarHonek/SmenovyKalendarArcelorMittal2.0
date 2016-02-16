@@ -151,6 +151,9 @@ public class Database extends SQLiteOpenHelper {
 
 
 
+
+
+
     public void insertSymbols(String name, String shortTitle, String color)
     {
 

@@ -1,20 +1,31 @@
 package mh.smenovykalendararcelormittal20;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GestureDetectorCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.antonyt.infiniteviewpager.InfiniteViewPager;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
@@ -25,10 +36,21 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import mh.smenovykalendararcelormittal20.calendarHeader.FragmentCustom;
+import mh.smenovykalendararcelormittal20.calendarHeader.FragmentOriginal;
+
 public class MainActivity extends AppCompatActivity {
 
     private boolean undo = false;
     private CalendarCustomFragment caldroidFragment;
+
+    SharedPreferences pref;
+
+    boolean customShift;
+    int index;
+    InfiniteViewPager infiniteViewPager;
+    LinearLayout lin;
+
 
 
     private void setCustomResourceForDates() {
@@ -53,11 +75,15 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
+
+        switchCustomOriginalFragment();
+
         final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
 
         // Setup caldroid fragment
         // **** If you want normal CaldroidFragment, use below line ****
         caldroidFragment = new CalendarCustomFragment();
+
 
 
 
@@ -83,11 +109,16 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
             // Uncomment this line to use dark theme
 //            args.putInt(CaldroidFragment.THEME_RESOURCE, com.caldroid.R.style.CaldroidDefaultDark);
 
             caldroidFragment.setArguments(args);
         }
+
+
+
 
 
         // Attach to the activity
@@ -103,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
               /*  Toast.makeText(getApplicationContext(), formatter.format(date),
                         Toast.LENGTH_SHORT).show();*/
 
-            //    caldroidFragment.setBackgroundResourceForDate(Color.RED, date);
+                caldroidFragment.setBackgroundResourceForDate(Color.RED, date);
                 caldroidFragment.refreshView();
             }
 
@@ -128,7 +159,11 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("month", intMonth);
                 intent.putExtra("year", year);
                 intent.putExtra("day", day);
-                startActivity(intent);
+                SharedPreferences pref = getSharedPreferences("shift", Context.MODE_PRIVATE);
+
+                if(customShift) {
+                    startActivity(intent);
+                }
             }
 
             @Override
@@ -138,8 +173,14 @@ public class MainActivity extends AppCompatActivity {
                   /*  Toast.makeText(getApplicationContext(),
                             "Caldroid view is created", Toast.LENGTH_SHORT)
                             .show();*/
+
                 }
+
+
+
             }
+
+
 
         };
 
@@ -152,6 +193,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         final Bundle state = savedInstanceState;
+
+
 
 
 
@@ -195,6 +238,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+
+        switchCustomOriginalFragment();
+        caldroidFragment.aa();
         caldroidFragment.refreshView();
         super.onResume();
     }
@@ -204,6 +250,30 @@ public class MainActivity extends AppCompatActivity {
         String[] months = new String[]{"Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec"};
         return months[month];
     }
+
+    public void switchCustomOriginalFragment()
+    {
+        pref = getSharedPreferences("shift", Context.MODE_PRIVATE);
+        customShift = pref.getBoolean("customShift", false);
+        index = pref.getInt("listPosition", -2);
+
+
+        if (index != -2) {
+            Fragment fr = null;
+
+            if (!customShift)
+                fr = new FragmentOriginal();
+            else fr = new FragmentCustom();
+
+
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_place, fr);
+            fragmentTransaction.commit();
+        }
+    }
+
+
 
 
     /**

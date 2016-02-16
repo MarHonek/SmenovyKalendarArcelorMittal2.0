@@ -1,17 +1,19 @@
 package mh.smenovykalendararcelormittal20;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,6 +30,7 @@ public class ChangeShiftActivity extends AppCompatActivity {
     ListView listView;
     String color;
     LinearLayout shiftLayout, icon;
+    ImageView deleteShift;
 
     ShiftListViewAdapter adapter;
     ArrayList<ShiftSymbolTemplates> list;
@@ -35,7 +38,8 @@ public class ChangeShiftActivity extends AppCompatActivity {
     int positionOfSymbol;
     EditText note;
 
-    TextView changeShiftTitle, iconText;
+    TextView changeShiftTitle, iconText, date;
+    Button deleteNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +54,35 @@ public class ChangeShiftActivity extends AppCompatActivity {
         getSymbolsFromDatabase();
 
         color = "#ff9800";
+        positionOfSymbol = -1;
 
         shiftLayout = (LinearLayout)findViewById(R.id.linearLayout_change_shift);
         changeShiftTitle = (TextView)findViewById(R.id.textView_change_shift_title);
         iconText = (TextView)findViewById(R.id.textView_change_shift_icon_text);
         icon = (LinearLayout) findViewById(R.id.linearLayout_change_shift_circle);
+        date = (TextView)findViewById(R.id.textView_change_shift_date);
+        deleteShift = (ImageView)findViewById(R.id.imageView_change_shift_delete_shift);
 
         note = (EditText)findViewById(R.id.editext_change_snift_note);
+        deleteNote = (Button)findViewById(R.id.button_change_shift_delete_text);
+
+
+
+        Intent intent = getIntent();
+        String day = intent.getStringExtra("day");
+        String month = intent.getStringExtra("month");
+        String year = intent.getStringExtra("year");
+        date.setText(day + ". " + month + ". " + year);
+
+
+        deleteNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                note.setText("");
+                Log.v("ddw", "bla");
+                //   if
+            }
+        });
 
         shiftLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +125,8 @@ public class ChangeShiftActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     public void getSymbolsFromDatabase()
@@ -125,10 +153,16 @@ public class ChangeShiftActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.ic_accept) {
-           if(note.getText().length() > 0)
-           {
+            if (positionOfSymbol != -1)
+            {
+             //   database.insertAlternative();
+            }
+
+
+            if(note.getText().length() > 0)
+            {
                // database.insertNote(0, );
-           }
+            }
         }
         return super.onOptionsItemSelected(item);
     }

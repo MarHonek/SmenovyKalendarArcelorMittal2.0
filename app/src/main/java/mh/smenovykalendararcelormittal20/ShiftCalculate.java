@@ -14,50 +14,50 @@ import mh.smenovykalendararcelormittal20.templates.StaticShiftTemplate;
 public class ShiftCalculate {
 
     private String[] schemeCykle;
-    private int day,month,year;
+    private int day, month, year;
 
 
-    public ShiftCalculate(int position, String radio)
-    {
-        StaticShiftTemplate staticS = StaticShiftTemplate.createList().get(position);
-        String shift = "";
+    public ShiftCalculate(int position, String radio) {
+       if(position != -2) {
+           StaticShiftTemplate staticS = StaticShiftTemplate.createList().get(position);
 
-        switch (radio)
-        {
-            case "A":
-                shift = staticS.getShiftA();
-                break;
+           String shift = "";
 
-            case "B":
-                shift = staticS.getShiftB();
-                break;
+           switch (radio) {
+               case "A":
+                   shift = staticS.getShiftA();
+                   break;
 
-            case "C":
-                shift = staticS.getShiftC();
-                break;
+               case "B":
+                   shift = staticS.getShiftB();
+                   break;
 
-            case "D":
-                shift = staticS.getShiftD();
-                break;
-        }
+               case "C":
+                   shift = staticS.getShiftC();
+                   break;
 
-        getShemeCykle(shift);
+               case "D":
+                   shift = staticS.getShiftD();
+                   break;
+           }
 
+           getShemeCykle(shift);
+       }
     }
 
-    private void getShemeCykle(String shift)
-    {
+    private void getShemeCykle(String shift) {
         schemeCykle = shift.split(";");
     }
 
-    public String getShiftByDate()
-    {
-        int days = getNumDays();
-        Log.d("da", String.valueOf(days));
-        int index = (days % schemeCykle.length);
-        String sh  = schemeCykle[index];
+    public String getShiftByDate() {
+        String sh = "";
+        if(schemeCykle != null) {
+            int days = getNumDays();
+            Log.d("da", String.valueOf(days));
+            int index = (days % schemeCykle.length);
+            sh = schemeCykle[index];
+        }
         return sh;
-
     }
 
     public void setDate(int day, int month, int year)

@@ -65,8 +65,8 @@ public class FragmentShift extends Fragment {
                 SharedPreferences pref = getActivity().getSharedPreferences("shift", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putInt("positionOfCustom", position);
-                editor.putInt("listPosition", -1);
-                editor.putString("shortTitle", "");
+                editor.putInt("listPosition", list.get(position).getPosition());
+                editor.putString("shortTitle", list.get(position).getShortTitle());
                 editor.putBoolean("customShift", true);
                 editor.commit();
 
