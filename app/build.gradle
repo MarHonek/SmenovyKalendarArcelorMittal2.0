@@ -5,11 +5,11 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "mh.smenovykalendararcelormittal20"
+        applicationId "mh.shiftcalendaram"
         minSdkVersion 9
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode=24
+        versionName="1.8"
     }
     buildTypes {
         release {
