@@ -81,7 +81,7 @@
             android:id="@+id/imageView_change_shift_delete_shift"
             android:layout_gravity="right"
             android:src="@drawable/ic_delete_black"
-            android:visibility="gone"
+            android:visibility="invisible"
             android:padding="10dp" />
 
     </LinearLayout>

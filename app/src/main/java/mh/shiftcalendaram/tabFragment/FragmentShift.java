@@ -58,8 +58,8 @@ public class FragmentShift extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                
-                SharedPreferences pref = getActivity().getSharedPreferences("shift", Context.MODE_PRIVATE);
+
+                SharedPreferences pref = getActivity().getSharedPreferences("shift",Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putInt("positionOfCustom", position);
                 editor.putInt("listPosition", list.get(position).getPosition());

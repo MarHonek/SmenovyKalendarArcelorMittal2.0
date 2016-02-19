@@ -1,13 +1,10 @@
-package mh.shiftcalendaram;
-
-import java.io.Serializable;
+package mh.shiftcalendaram.templates;
 
 
-public class AlternativeShifts implements Serializable {
+
+public class AlternativeShifts{
 	
 
-	private static final long serialVersionUID = 1L;
-	
 	
 	String kind;
 	int position;

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import hirondelle.date4j.DateTime;
+import mh.shiftcalendaram.templates.AlternativeShifts;
 import mh.shiftcalendaram.templates.ShiftNotesTemplate;
 
 /**
@@ -48,10 +50,9 @@ public class CalendarCustomAdapter extends CaldroidGridAdapter {
 
     public CalendarCustomAdapter(Context context, int month, int year, HashMap<String, Object> caldroidData, HashMap<String, Object> extraData) {
         super(context, month, year, caldroidData, extraData);
-        aVoid();
         data = new Database(context);
-        notes = data.getTextNote();
-        alter = data.getSpecial();
+        aVoid();
+
     }
 
 
@@ -83,14 +84,14 @@ public class CalendarCustomAdapter extends CaldroidGridAdapter {
 
         new TestAsync(calculate,tv2,tv1,dateTime, cellView).execute();
 
-        for(int i = 0;i<alter.size();i++)
+        for(int i = 0;i<notes.size();i++)
         {
-            if(Integer.parseInt(alter.get(i).getYear()) == dateTime.getYear())
+            if(Integer.parseInt(notes.get(i).getYear()) == dateTime.getYear())
             {
-                if (Integer.parseInt(alter.get(i).getMonth()) == dateTime.getMonth()) {
-                    if (alter.get(i).getPosition() == dateTime.getDay()) {
-                        cellView.setBackgroundColor(Color.parseColor(alter.get(i).getColor()));
-                        tv2.setText(alter.get(i).getKind());
+                if (Integer.parseInt(notes.get(i).getMonth()) == dateTime.getMonth()) {
+                    if (notes.get(i).getPosition() == dateTime.getDay()) {
+                        note.setVisibility(View.VISIBLE);
+                        break;
                     }
                 }else break;
             }
@@ -100,25 +101,28 @@ public class CalendarCustomAdapter extends CaldroidGridAdapter {
             }
         }
 
-        for(int i = 0;i<notes.size();i++)
-        {
-            if(Integer.parseInt(notes.get(i).getYear()) == dateTime.getYear())
-            {
-                if (Integer.parseInt(notes.get(i).getMonth()) == dateTime.getMonth()) {
-                    if (notes.get(i).getPosition() == dateTime.getDay()) {
-                        note.setVisibility(View.VISIBLE);
-                    } else note.setVisibility(View.INVISIBLE);
-                }else break;
-            }
-            else
-            {
-                break;
+
+        for(int i = 0;i<alter.size();i++) {
+            if (Integer.parseInt(alter.get(i).getYear()) == dateTime.getYear()) {
+                if (Integer.parseInt(alter.get(i).getMonth()) == dateTime.getMonth()) {
+                    if (alter.get(i).getPosition() == dateTime.getDay()) {
+                        cellView.setBackgroundColor(Color.parseColor(alter.get(i).getColor()));
+                        tv2.setText(alter.get(i).getKind());
+                    }
+                }
+
             }
         }
 
 
 
         return cellView;
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        aVoid();
+        super.notifyDataSetChanged();
     }
 
     class TestAsync extends AsyncTask<Void, Integer, String>
@@ -175,6 +179,10 @@ public class CalendarCustomAdapter extends CaldroidGridAdapter {
 
 
         protected void onProgressUpdate(Integer...a){
+
+
+
+
         }
 
         protected void onPostExecute(String result) {
@@ -194,6 +202,10 @@ public class CalendarCustomAdapter extends CaldroidGridAdapter {
                 int index = pref.getInt("listPosition", -2);
                 String radio = pref.getString("shortTitle", "");
                 calculate = new ShiftCalculate(index, radio);
+
+
+        notes = data.getTextNote();
+        alter = data.getSpecial();
 
     }
 

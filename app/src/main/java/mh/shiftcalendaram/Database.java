@@ -9,6 +9,7 @@ import android.graphics.Color;
 
 import java.util.ArrayList;
 
+import mh.shiftcalendaram.templates.AlternativeShifts;
 import mh.shiftcalendaram.templates.ShiftNotesTemplate;
 import mh.shiftcalendaram.templates.ShiftSymbolTemplates;
 import mh.shiftcalendaram.templates.ShiftTemplate;
@@ -310,6 +311,42 @@ public class Database extends SQLiteOpenHelper {
 
     }
 
+    public void updateNote(int day, String month, String year, int custom, String note)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+
+        String update ="UPDATE notes SET note='"+note+"' WHERE position="+day+" AND month='"+month+"' AND year='"+year+"' AND custom="+custom+"";
+
+        db.execSQL(update);
+        db.close();
+    }
+
+
+
+
+    public void deleteAlter(int position, String month, String year, int positionOfCustom)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String d ="DELETE FROM alternative WHERE position="+position+" and month='"+month+"' and year='"+year+"' and custom='"+positionOfCustom+"'";
+        db.execSQL(d);
+
+        db.close();
+    }
+
+
+    public void updateAlter(int day, String month, String year, int custom, String kind, String color)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+
+        String update ="UPDATE alternative SET kind='"+kind+"' AND color='"+color+"' WHERE position="+day+" AND month='"+month+"' AND year='"+year+"' AND custom="+custom;
+
+        db.execSQL(update);
+        db.close();
+    }
+
 
 
 
@@ -337,6 +374,18 @@ public class Database extends SQLiteOpenHelper {
 
 
     }
+
+
+    public void deleteNotes(int position, String month, String year, int custom)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String d ="DELETE FROM notes WHERE position="+position+" and month='"+month+"' and year='"+year+"' and custom='"+custom+"'";
+        db.execSQL(d);
+        db.close();
+    }
+
+
 
 
 
