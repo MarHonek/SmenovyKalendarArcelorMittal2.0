@@ -13,6 +13,7 @@ import mh.shiftcalendaram.templates.AlternativeShifts;
 import mh.shiftcalendaram.templates.ShiftNotesTemplate;
 import mh.shiftcalendaram.templates.ShiftSymbolTemplates;
 import mh.shiftcalendaram.templates.ShiftTemplate;
+import mh.shiftcalendaram.templates.StaticShiftTemplate;
 
 /**
  * Created by Martin on 02.02.2016.
@@ -247,6 +248,8 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
+        ArrayList<String> list = StaticShiftTemplate.getStringArray();
+
         ShiftTemplate shift = null;
         if (cursor.moveToFirst()) {
             do {
@@ -255,7 +258,7 @@ public class Database extends SQLiteOpenHelper {
                 String shortTitle = cursor.getString(2);
                 int position = cursor.getInt(3);
                 int color = cursor.getInt(4);
-                shift = new ShiftTemplate(title, shortTitle, color, position, "");
+                shift = new ShiftTemplate(title, shortTitle, color, position, list.get(position));
 
                 shifts.add(shift);
             } while (cursor.moveToNext());
@@ -341,7 +344,7 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
 
-        String update ="UPDATE alternative SET kind='"+kind+"' AND color='"+color+"' WHERE position="+day+" AND month='"+month+"' AND year='"+year+"' AND custom="+custom;
+        String update ="UPDATE alternative SET kind='"+kind+"', color='"+color+"' WHERE position="+day+" AND month='"+month+"' AND year='"+year+"' AND custom="+custom;
 
         db.execSQL(update);
         db.close();

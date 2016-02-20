@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="mh.shiftcalendaram.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -19,25 +19,30 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="mh.shiftcalendaram.ManagingActivity"
+            android:name=".ManagingActivity"
             android:label="@string/title_activity_managing"
-            android:parentActivityName="mh.shiftcalendaram.MainActivity"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="mh.shiftcalendaram.CreatingEditableShift"
+            android:name=".CreatingEditableShift"
             android:label="@string/title_activity_creating_editable_shift"
-            android:parentActivityName="mh.shiftcalendaram.ManagingActivity"
+            android:parentActivityName=".ManagingActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name="mh.shiftcalendaram.StaticShiftChoose" />
+        <activity android:name=".StaticShiftChoose" />
         <activity
-            android:name="mh.shiftcalendaram.CreatingSymbol"
+            android:name=".CreatingSymbol"
             android:label="@string/title_activity_creating_symbol"
-            android:parentActivityName="mh.shiftcalendaram.ManagingActivity"
+            android:parentActivityName=".ManagingActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="mh.shiftcalendaram.ChangeShiftActivity"
+            android:name=".ChangeShiftActivity"
             android:label="@string/title_activity_change_shift"
-            android:parentActivityName="mh.shiftcalendaram.MainActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".StatisticActivity"
+            android:label="@string/title_activity_statistic"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme"></activity>
     </application>
 

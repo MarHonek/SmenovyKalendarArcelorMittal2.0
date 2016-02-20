@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -144,9 +145,15 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                 {
                     if((holidays.get(i).getDay() == Integer.parseInt(adapter.getSelectedDay(position)))&&(holidays.get(i).getMonth().equals(adapter.getActualMonth())) && (adapter.isPositionInActualMonth(position)))
                     {
-                        holiday = holidays.get(i).getName();
+                        holiday += "\n" + holidays.get(i).getName();
 
                     }
+                }
+
+                int[] easter = Holidays.getEasterMondayDate(Integer.parseInt(adapter.getActualYear()));
+                if((easter[0] == Integer.parseInt(adapter.getSelectedDay(position)))&&(String.valueOf(easter[1]).equals(adapter.getActualMonth())) && (adapter.isPositionInActualMonth(position)))
+                {
+                    holiday += "\n" + "Velikonoční pondělí";
                 }
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -311,6 +318,10 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
             adapter.defaultYear(defaultYear);
             adapter.refreshCalendar();
             getSupportActionBar().setTitle(adapter.getActualMonthAndYear(monthTitles));
+        }
+        else if (id == R.id.ic_statistic)
+        {
+            startActivity(new Intent(MainActivity.this,StatisticActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

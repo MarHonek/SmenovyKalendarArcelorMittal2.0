@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="mh.shiftcalendaram.StatisticActivity"
+    tools:showIn="@layout/activity_statistic"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vybrané schéma:"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:id="@+id/textView_statistic_header_label" />
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="mh.shiftcalendaram.ShiftHeaderFragment"
+        android:id="@+id/fragment"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#DDDDDD"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Statistika pro rok: "
+        android:layout_marginTop="16dp"
+        android:textSize="17sp"
+        android:layout_marginBottom="16dp"
+
+        android:layout_gravity="center"
+        android:id="@+id/textView_statistic_actual_year_label" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#DDDDDD"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView_statistic"
+        android:layout_gravity="center_horizontal" />
+</LinearLayout>

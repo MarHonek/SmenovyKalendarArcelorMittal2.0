@@ -9,5 +9,6 @@
     <string name="tab_layout_symbols">Směny</string>
     <string name="title_activity_creating_editable_shift">Vytvořit schéma</string>
     <string name="title_activity_creating_symbol">Vytvořit směnu</string>
-    <string name="title_activity_change_shift">ChangeShiftActivity</string>
+    <string name="title_activity_change_shift">Změna směny a poznámky</string>
+    <string name="title_activity_statistic">Statistika</string>
 </resources>
