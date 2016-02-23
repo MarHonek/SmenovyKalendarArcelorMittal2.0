@@ -1,11 +1,15 @@
 package mh.shiftcalendaram;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -28,6 +32,8 @@ import mh.shiftcalendaram.templates.AlternativeShifts;
 import mh.shiftcalendaram.templates.ListTemplates;
 import mh.shiftcalendaram.templates.ShiftNotesTemplate;
 import mh.shiftcalendaram.templates.ShiftSymbolTemplates;
+import mh.shiftcalendaram.widgets.WeekWidgetProvider;
+import mh.shiftcalendaram.widgets.WidgetProvider;
 
 public class ChangeShiftActivity extends AppCompatActivity {
 
@@ -256,6 +262,12 @@ public class ChangeShiftActivity extends AppCompatActivity {
                     database.deleteNotes(positionOfCalendar,month,year,positionOfCustom);
                 }
             }
+
+       /*     try {
+                updateAllWidgets();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }*/
             this.finish();
         }
         return super.onOptionsItemSelected(item);
@@ -279,6 +291,33 @@ public class ChangeShiftActivity extends AppCompatActivity {
 
 
 
+
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    private void updateAllWidgets() throws InterruptedException{
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(ChangeShiftActivity.this);
+        int appWidgetIds[] = appWidgetManager.getAppWidgetIds(
+                new ComponentName(ChangeShiftActivity.this, WidgetProvider.class));
+
+        int appWidgetIds2[] = appWidgetManager.getAppWidgetIds(
+                new ComponentName(ChangeShiftActivity.this, WeekWidgetProvider.class));
+
+
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds2, R.id.gridView_week_widget);
+
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.listViewWidget);
+
+
+
+
+    }
+
+
+    private void updateAllWidgets2(){
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(ChangeShiftActivity.this);
+
+
+    }
 
 
 }

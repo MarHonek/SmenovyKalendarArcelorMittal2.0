@@ -156,6 +156,13 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                     holiday += "\n" + "Velikonoční pondělí";
                 }
 
+                int[] easterFriday = Holidays.getEasterFriday(Integer.parseInt(adapter.getActualYear()));
+                if((easterFriday[0] == Integer.parseInt(adapter.getSelectedDay(position)))&&(String.valueOf(easterFriday[1]).equals(adapter.getActualMonth())) && (adapter.isPositionInActualMonth(position)))
+                {
+                    holiday += "\n" + "Velký pátek";
+                }
+
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
                 // 2. Chain together various setter methods to set the dialog characteristics

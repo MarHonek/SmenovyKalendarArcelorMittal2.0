@@ -294,11 +294,17 @@ public class Database extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        String d ="UPDATE symbols SET name='"+name+"', short='"+shortTitle+"', color='"+color+"' WHERE id in (SELECT id FROM symbols LIMIT 1 OFFSET "+position+")";
+        String update ="UPDATE alternative SET kind='"+shortTitle+"', color='"+color+"' WHERE kind in (SELECT short FROM symbols WHERE id in (SELECT id FROM symbols LIMIT 1 OFFSET "+position+"))";
 
+        String d ="UPDATE symbols SET name='"+name+"', short='"+shortTitle+"', color='"+color+"' WHERE id in (SELECT id FROM symbols LIMIT 1 OFFSET "+position+")";
+        db.execSQL(update);
         db.execSQL(d);
+
+
         db.close();
     }
+
+
 
     public void updateShift(String title, String shortTitle, int position,int color, int positionOfCustom)
     {
@@ -308,6 +314,7 @@ public class Database extends SQLiteOpenHelper {
         String d ="UPDATE shifts SET title='"+title+"', short='"+shortTitle+"', position="+position+", color="+color+" WHERE id in (SELECT id FROM Shifts LIMIT 1 OFFSET "+positionOfCustom+")";
 
         db.execSQL(d);
+
 
         db.close();
 
