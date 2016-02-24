@@ -12,7 +12,8 @@
     tools:context="mh.shiftcalendaram.ChangeShiftActivity"
     tools:showIn="@layout/activity_change_shift"
     android:weightSum="1"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#FAFAFA">
 
     <TextView
         android:layout_width="wrap_content"

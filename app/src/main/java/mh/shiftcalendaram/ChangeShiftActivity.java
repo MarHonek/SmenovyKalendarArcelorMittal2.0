@@ -106,7 +106,7 @@ public class ChangeShiftActivity extends AppCompatActivity {
         year = intent.getStringExtra("Year");
         positionOfCalendar = intent.getIntExtra("position", -1);
         positionOfCustom = intent.getIntExtra("positionOfCustom", -1);
-        date.setText(day + ". " + month + ". " + year);
+        date.setText(day + ". " + String.valueOf(Integer.parseInt(month)+1) + ". " + year);
 
         notes = database.getTextNote();
 
@@ -263,11 +263,7 @@ public class ChangeShiftActivity extends AppCompatActivity {
                 }
             }
 
-       /*     try {
-                updateAllWidgets();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
+
             this.finish();
         }
         return super.onOptionsItemSelected(item);
@@ -288,6 +284,28 @@ public class ChangeShiftActivity extends AppCompatActivity {
         return  note;
 
     }
+
+    @Override
+    protected void onDestroy() {
+        // TODO Auto-generated method stub
+        if(android.os.Build.VERSION.SDK_INT > 11)
+        {
+            try
+            {
+                updateAllWidgets();
+
+            }
+            catch(Exception ex)
+            {
+
+            }
+        }
+
+        super.onDestroy();
+
+
+    }
+
 
 
 

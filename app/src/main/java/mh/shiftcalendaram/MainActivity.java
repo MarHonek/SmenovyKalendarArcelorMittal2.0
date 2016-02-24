@@ -330,6 +330,10 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         {
             startActivity(new Intent(MainActivity.this,StatisticActivity.class));
         }
+        else if(id == R.id.ic_about)
+        {
+            startActivity(new Intent(MainActivity.this,AboutActivity.class));
+        }
         return super.onOptionsItemSelected(item);
     }
 

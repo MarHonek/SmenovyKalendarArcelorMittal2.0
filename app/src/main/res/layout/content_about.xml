@@ -1,0 +1,139 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/scrollView">
+
+<LinearLayout
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp">
+
+    <TextView
+        android:id="@+id/textView_aboutApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="4dp"
+        android:text="O aplikaci"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="2dp"
+        android:text="@string/about_desc_name" />
+
+    <TextView
+        android:id="@+id/textView_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="2dp"
+        android:text="@string/about_version" />
+
+    <TextView
+        android:id="@+id/textView_aboutDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="2dp"
+        android:text="@string/about_desc" />
+
+    <TextView
+        android:id="@+id/textView_aboutMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="O autorovi"
+        android:paddingTop="10dp"
+        android:paddingBottom="4dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView_createName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="2dp"
+        android:text="@string/about_creator" />
+
+    <TextView
+        android:id="@+id/textView_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/about_email" />
+
+
+    <TextView
+        android:id="@+id/textView_about_shift"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Směny a chyby"
+        android:paddingBottom="4dp"
+        android:paddingTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView_custom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/about_info_custom_shift" />
+
+    <TextView
+        android:id="@+id/textView_about_bugs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="4dp"
+        android:text="Pokud naleznete chybu nebo máte nápad jak aplikaci zlepšit,taktéž napište na uvedený email" />
+
+    <TextView
+        android:id="@+id/textView_about_donate_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Podpořit - DONATE"
+        android:paddingTop="10dp"
+        android:paddingBottom="4dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView_about_donate_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:paddingBottom="2dp"
+        android:text="Aplikace je bez reklam a je vyvíjena zcela zadarmo" />
+
+    <TextView
+        android:id="@+id/textView_about_donate_desc2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pokud se vám aplikace líbí a využíváte ji, přispějte jakýmkoliv finančním příspěvkem na její další vývoj" />
+    <TextView
+        android:id="@+id/textView_about_donate_desc_acc_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="Příspěvky můžete zasílat na účet:" />
+
+    <TextView
+        android:id="@+id/textView_about_donate_desc_acc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="249833219 / 0300" />
+
+    <TextView
+        android:id="@+id/textView_about_thanks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="Děkuji moc všem, kteří aplikaci podpořili" />
+
+
+
+
+</LinearLayout>
+
+</ScrollView>

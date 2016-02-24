@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mh.shiftcalendaram">
 
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -42,18 +41,18 @@
             android:label="@string/title_activity_change_shift"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme">
-        <intent-filter>
-            <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
-        </intent-filter>
-        <intent-filter>
-            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-        </intent-filter>
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
         </activity>
 
         <receiver
             android:name=".widgets.WidgetProvider"
             android:enabled="@bool/is_honeycomb"
-            android:label="Poznámky směn AMO" >
+            android:label="Poznámky směn AMO">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name=".UPDATE_LIST" />
@@ -63,22 +62,20 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widgetinfo" />
         </receiver>
-
         <receiver
             android:name=".widgets.WeekWidgetProvider"
             android:enabled="@bool/is_honeycomb"
-            android:label="Kalendář AMO" >
+            android:label="Kalendář AMO">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name=".UPDATE_LIST" />
-                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.TIME_SET" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/weekwidgetinfo" />
         </receiver>
-
 
         <service
             android:name=".widgets.WeekWidgetService"
@@ -87,21 +84,22 @@
             android:name=".widgets.WidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
-        <receiver android:name=".widgets.WidgetPhoneBootReciever" >
+        <receiver android:name=".widgets.WidgetPhoneBootReciever">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-
-
         <activity
             android:name=".StatisticActivity"
             android:label="@string/title_activity_statistic"
             android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/title_activity_about"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme"></activity>
-
-
     </application>
 
 </manifest>

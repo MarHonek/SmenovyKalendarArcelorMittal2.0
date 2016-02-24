@@ -68,21 +68,21 @@ import mh.shiftcalendaram.widgets.WidgetListItem;
 	    
 	    if(custom.size() > 0)
 	    {
-	    
+
 		for(int i = 0;i < 7;i++)
 		{
 
-			
-			
-			
+
+
+
 			String background = "#EEEEEE";
 			boolean notes = false;
 			adapter = new CalendarAdapter(context, greg);
-			
-			
-			
+
+
+
 			int first = adapter.getFirstDay();
-			
+
 			
 			String[] kal = calculate.monthShifts(first, orig.get(custom.get(0).getPosition()).getABCDShifts(custom.get(0).getShortTitle()), cal);
 			

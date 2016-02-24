@@ -94,7 +94,7 @@ import mh.shiftcalendaram.templates.ShiftTemplate;
 				e.printStackTrace();
 			}
 			adapter = new CalendarAdapter(context, cal);
-			
+
 			
 			
 			if((Integer.parseInt(list.get(i).getYear()) <= calendar.get(Calendar.YEAR)) && (Integer.parseInt(list.get(i).getMonth()) <= calendar.get(Calendar.MONTH)) && (Integer.parseInt(adapter.getSelectedDay(list.get(i).getPosition())) < calendar.get(Calendar.DAY_OF_MONTH)))

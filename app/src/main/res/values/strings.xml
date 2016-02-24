@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">SmenovyKalendarArcelorMittal2.0</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">Kalendář</string>
     <string name="title_activity_managing">Správa směn a schémat</string>
 
 
@@ -11,4 +10,13 @@
     <string name="title_activity_creating_symbol">Vytvořit směnu</string>
     <string name="title_activity_change_shift">Změna směny a poznámky</string>
     <string name="title_activity_statistic">Statistika</string>
+    <string name="title_activity_about">O aplikaci</string>
+
+
+    <string name="about_desc">Popis: Neoficiální aplikace - směnový kalendář primarně určen pro ArcelorMittal Ostrava</string>
+    <string name="about_desc_name">Název: Směnový kalendář AM Ostrava</string>
+    <string name="about_creator">Vytvořil: Martin Honěk</string>
+    <string name="about_email">E-mail: smenovy.kalendaram@gmail.com</string>
+    <string name="about_info_custom_shift">Pokud jste v aplikaci svůj kalendář nenalezli, zašlete kopii svého kalendáře na uvedený email</string>
+    <string name="about_version">Verze: 1.7.6</string>
 </resources>
